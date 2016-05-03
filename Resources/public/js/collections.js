@@ -37,10 +37,6 @@
      *                   objects behavior.
      */
     window.infinite.Collection = function (collection, prototypes, options) {
-        this.$collection = $(collection);
-        this.internalCount = this.$collection.children().length;
-        this.$prototypes = prototypes;
-
         this.options = $.extend({
             allowAdd: true,
             allowDelete: true,
@@ -51,6 +47,10 @@
             removeSelector: '.remove_item',
             keepScripts: false
         }, options || {});
+        
+        this.$collection = $(collection);
+        this.internalCount = this.$collection.find(this.options.itemSelector).length;
+        this.$prototypes = prototypes;
 
         this.initialise();
     };
